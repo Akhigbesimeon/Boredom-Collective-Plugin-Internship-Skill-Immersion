@@ -1,6 +1,6 @@
 bl_info = {
     "name": "Scene Cleanup Assistant",
-    "author": "Your Name",
+    "author": "Akhigbe Simeon",
     "version": (1, 0),
     "blender": (3, 0, 0),
     "location": "View3D > Sidebar > Cleanup",

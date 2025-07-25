@@ -1,6 +1,6 @@
 bl_info = {
     "name": "Auto Keyframe Helper",
-    "author": "Your Name",
+    "author": "Akhigbe Simeon",
     "version": (1, 0),
     "blender": (2, 93, 0),
     "location": "View3D > Sidebar > Auto Keyframe",
@@ -10,10 +10,8 @@ bl_info = {
 
 import bpy
 
-# Store the last frame's transform data
 previous_transforms = {}
 
-# Add-on properties
 class AutoKeyframeSettings(bpy.types.PropertyGroup):
     enable_auto_keyframe: bpy.props.BoolProperty(
         name="Enable Auto Keyframe",
@@ -21,7 +19,6 @@ class AutoKeyframeSettings(bpy.types.PropertyGroup):
         default=False
     )
 
-# Panel UI
 class AUTOKEYFRAME_PT_panel(bpy.types.Panel):
     bl_label = "Auto Keyframe Helper"
     bl_idname = "AUTOKEYFRAME_PT_panel"
@@ -35,7 +32,6 @@ class AUTOKEYFRAME_PT_panel(bpy.types.Panel):
         layout.prop(settings, "enable_auto_keyframe")
 
 
-# Frame change handler
 def auto_keyframe_handler(scene):
     if not scene.auto_keyframe_settings.enable_auto_keyframe:
         return
@@ -48,14 +44,12 @@ def auto_keyframe_handler(scene):
     current_frame = scene.frame_current
     key = obj.name
 
-    # Get current transform
     current_transform = (
         tuple(obj.location),
         tuple(obj.rotation_euler),
         tuple(obj.scale)
     )
 
-    # Compare and insert keyframe if changed
     if key not in previous_transforms or previous_transforms[key] != current_transform:
         obj.keyframe_insert(data_path="location", frame=current_frame)
         obj.keyframe_insert(data_path="rotation_euler", frame=current_frame)
@@ -63,7 +57,6 @@ def auto_keyframe_handler(scene):
         previous_transforms[key] = current_transform
 
 
-# Register / Unregister
 classes = (
     AutoKeyframeSettings,
     AUTOKEYFRAME_PT_panel,

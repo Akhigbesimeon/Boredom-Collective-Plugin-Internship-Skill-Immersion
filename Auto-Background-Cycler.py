@@ -1,6 +1,6 @@
 bl_info = {
     "name": "Auto Background Cycler",
-    "author": "Your Name",
+    "author": "Akhigbe Simeon",
     "version": (1, 0),
     "blender": (2, 93, 0),
     "location": "World Properties > Background Cycler",

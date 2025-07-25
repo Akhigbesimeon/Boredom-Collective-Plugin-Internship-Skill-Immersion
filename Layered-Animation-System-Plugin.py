@@ -1,6 +1,6 @@
 bl_info = {
     "name": "Layered Animation System",
-    "author": "Your Name",
+    "author": "Akhigbe Simeon",
     "version": (1, 0),
     "blender": (3, 0, 0),
     "location": "View3D > Sidebar > Anim Layers",
@@ -10,11 +10,9 @@ bl_info = {
 
 import bpy
 
-# Property group for managing layer names
 class AnimLayerSettings(bpy.types.PropertyGroup):
     layer_name: bpy.props.StringProperty(name="Layer Name", default="New Layer")
 
-# Panel UI
 class ANIMLAYER_PT_panel(bpy.types.Panel):
     bl_label = "Animation Layers"
     bl_idname = "ANIMLAYER_PT_panel"
@@ -33,7 +31,6 @@ class ANIMLAYER_PT_panel(bpy.types.Panel):
         layout.operator("anim_layer.mute_all", icon="HIDE_OFF")
         layout.operator("anim_layer.unmute_all", icon="HIDE_ON")
 
-# Operator to add a new NLA track as a layer
 class ANIMLAYER_OT_add(bpy.types.Operator):
     bl_idname = "anim_layer.add"
     bl_label = "Add Animation Layer"
@@ -59,7 +56,6 @@ class ANIMLAYER_OT_add(bpy.types.Operator):
 
         return {'FINISHED'}
 
-# Operator to remove selected NLA track
 class ANIMLAYER_OT_remove(bpy.types.Operator):
     bl_idname = "anim_layer.remove"
     bl_label = "Remove Active Layer"
@@ -80,7 +76,6 @@ class ANIMLAYER_OT_remove(bpy.types.Operator):
         self.report({'WARNING'}, "No selected NLA track")
         return {'CANCELLED'}
 
-# Operator to mute all layers
 class ANIMLAYER_OT_mute_all(bpy.types.Operator):
     bl_idname = "anim_layer.mute_all"
     bl_label = "Mute All Layers"
@@ -92,7 +87,6 @@ class ANIMLAYER_OT_mute_all(bpy.types.Operator):
                 track.mute = True
         return {'FINISHED'}
 
-# Operator to unmute all layers
 class ANIMLAYER_OT_unmute_all(bpy.types.Operator):
     bl_idname = "anim_layer.unmute_all"
     bl_label = "Unmute All Layers"
@@ -104,7 +98,6 @@ class ANIMLAYER_OT_unmute_all(bpy.types.Operator):
                 track.mute = False
         return {'FINISHED'}
 
-# Registering classes
 classes = (
     AnimLayerSettings,
     ANIMLAYER_PT_panel,

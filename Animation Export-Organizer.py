@@ -1,6 +1,6 @@
 bl_info = {
     "name": "Animation Export Organizer",
-    "author": "Your Name",
+    "author": "Akhigbe Simeon",
     "version": (1, 0),
     "blender": (3, 0, 0),
     "location": "View3D > Sidebar > Export Organizer",
@@ -11,7 +11,6 @@ bl_info = {
 import bpy
 import os
 
-# Property for each export entry
 class ExportEntry(bpy.types.PropertyGroup):
     name: bpy.props.StringProperty(name="Shot Name")
     start_frame: bpy.props.IntProperty(name="Start Frame")
@@ -27,7 +26,6 @@ class ExportEntry(bpy.types.PropertyGroup):
         default='FBX'
     )
 
-# UI Panel
 class EXPORTORGANIZER_PT_panel(bpy.types.Panel):
     bl_label = "Animation Export Organizer"
     bl_idname = "EXPORTORGANIZER_PT_panel"
@@ -56,7 +54,6 @@ class EXPORTORGANIZER_PT_panel(bpy.types.Panel):
 
         layout.operator("export_organizer.export_all", icon='EXPORT')
 
-# Operator: Add Entry
 class EXPORTORGANIZER_OT_add_entry(bpy.types.Operator):
     bl_idname = "export_organizer.add_entry"
     bl_label = "Add Export Entry"
@@ -65,7 +62,6 @@ class EXPORTORGANIZER_OT_add_entry(bpy.types.Operator):
         context.scene.export_organizer.entries.add()
         return {'FINISHED'}
 
-# Operator: Remove Entry
 class EXPORTORGANIZER_OT_remove_entry(bpy.types.Operator):
     bl_idname = "export_organizer.remove_entry"
     bl_label = "Remove Entry"
@@ -76,7 +72,6 @@ class EXPORTORGANIZER_OT_remove_entry(bpy.types.Operator):
         context.scene.export_organizer.entries.remove(self.index)
         return {'FINISHED'}
 
-# Operator: Export Single Entry
 class EXPORTORGANIZER_OT_export_entry(bpy.types.Operator):
     bl_idname = "export_organizer.export_entry"
     bl_label = "Export Entry"
@@ -87,7 +82,6 @@ class EXPORTORGANIZER_OT_export_entry(bpy.types.Operator):
         entry = context.scene.export_organizer.entries[self.index]
         return export_animation(entry)
 
-# Operator: Export All
 class EXPORTORGANIZER_OT_export_all(bpy.types.Operator):
     bl_idname = "export_organizer.export_all"
     bl_label = "Export All Animations"
@@ -100,7 +94,6 @@ class EXPORTORGANIZER_OT_export_all(bpy.types.Operator):
         self.report({'INFO'}, "All animations exported")
         return {'FINISHED'}
 
-# Core export function
 def export_animation(entry):
     bpy.context.scene.frame_start = entry.start_frame
     bpy.context.scene.frame_end = entry.end_frame
@@ -118,11 +111,9 @@ def export_animation(entry):
 
     return {'FINISHED'}
 
-# Property Group for entries
 class ExportOrganizerSettings(bpy.types.PropertyGroup):
     entries: bpy.props.CollectionProperty(type=ExportEntry)
 
-# Registration
 classes = (
     ExportEntry,
     ExportOrganizerSettings,
