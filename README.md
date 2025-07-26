@@ -124,7 +124,7 @@ This code is available to use for anybody or organization
 
 ## Authors
 
-Created by Akhigbe Simeon as part of an animation technology internship to streamline animator workflows and build production-ready tools.
+Created by Akhigbe Simeon as part of the Boredom Collective internship to streamline animator workflows and build production-ready tools.
 
 ---
 
